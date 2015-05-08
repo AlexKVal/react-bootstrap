@@ -43,10 +43,10 @@ module.exports = function (config) {
 
     autoWatch: true,
 
-    browsers: [ 'Chrome' ],
+    browsers: [ 'Firefox' ],
 
     captureTimeout: 60000,
-    browserNoActivityTimeout: 30000,
+    browserNoActivityTimeout: 45000,
 
     singleRun: isCI
   });
