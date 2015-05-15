@@ -1,0 +1,43 @@
+#!/usr/bin/env babel-node
+/* eslint no-process-exit: 0 */
+import 'colors';
+import path from 'path';
+import { inspect } from 'util';
+import { spawn } from 'child-process-promise';
+
+import buildConfCases from './buildConfSpec.js';
+import testConfCases from './testConfSpec.js';
+import docsConfCases from './docsConfSpec.js';
+
+function asString(object) {
+  return inspect(object, { depth: null });
+}
+
+function checkAll(configCases) {
+  const webpackMock = path.join(__dirname, 'webpack-mock');
+
+  configCases.cases.forEach((testCase) => {
+
+    spawn(webpackMock, [configCases.path, testCase.argv], {capture: ['stdout', 'stderr']})
+    .then(({ stdout }) => {
+      let expected = asString(testCase.expected);
+      if (expected !== stdout.trim()) {
+        throw {
+          message: `Do not pass for: "${configCases.path} ${testCase.argv}"`,
+          stderr: `Expected:\n${expected.green}\nGot:\n${stdout.red}`
+        };
+      }
+      process.stdout.write('.'.green);
+    })
+    .fail(err => {
+      console.log(err.message);
+      console.log(err.stderr);
+      process.exit(1);
+    });
+
+  });
+}
+
+checkAll(buildConfCases);
+checkAll(testConfCases);
+checkAll(docsConfCases);
