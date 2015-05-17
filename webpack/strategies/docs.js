@@ -16,9 +16,6 @@ export default (config, options) => {
         publicPath: '/assets/'
       },
       externals: undefined,
-      resolve: {
-        extensions: ['', '.js', '.json']
-      },
       module: {
         noParse: /babel-core\/browser/,
         loaders: config.module.loaders
