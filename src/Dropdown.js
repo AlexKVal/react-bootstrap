@@ -10,6 +10,7 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 import find from 'lodash-compat/collection/find';
 import omit from 'lodash-compat/object/omit';
+import { all, elementType, isRequiredForA11y } from 'react-prop-types';
 
 import activeElement from 'dom-helpers/activeElement';
 import contains from 'dom-helpers/query/contains';
@@ -245,20 +246,20 @@ Dropdown.propTypes = {
    * @type {string|number}
    * @required
    */
-  id: CustomPropTypes.isRequiredForA11y(
+  id: isRequiredForA11y(
     React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.number
     ])
   ),
 
-  componentClass: CustomPropTypes.elementType,
+  componentClass: elementType,
 
   /**
    * The children of a Dropdown may be a `<Dropdown.Toggle/>` or a `<Dropdown.Menu/>`.
    * @type {node}
    */
-  children: CustomPropTypes.all([
+  children: all([
     CustomPropTypes.requiredRoles(TOGGLE_ROLE, MENU_ROLE),
     CustomPropTypes.exclusiveRoles(MENU_ROLE)
   ]),
