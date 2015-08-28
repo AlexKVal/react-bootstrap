@@ -10,7 +10,9 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 import find from 'lodash-compat/collection/find';
 import omit from 'lodash-compat/object/omit';
-import { all, elementType, isRequiredForA11y } from 'react-prop-types';
+import all from 'react-prop-types/lib/all';
+import elementType from 'react-prop-types/lib/elementType';
+import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
 import activeElement from 'dom-helpers/activeElement';
 import contains from 'dom-helpers/query/contains';

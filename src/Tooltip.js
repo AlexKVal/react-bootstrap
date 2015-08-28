@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import { isRequiredForA11y } from 'react-prop-types';
+import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
 export default class Tooltip extends React.Component {
   render() {
